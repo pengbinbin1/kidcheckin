@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useToastStore } from '@/stores/toast'
 
+const router = useRouter()
 const auth = useAuthStore()
 const toast = useToastStore()
 
@@ -36,6 +38,7 @@ async function submit() {
       await auth.signUpWithPassword(email.value, password.value)
       toast.success('注册成功')
     }
+    router.push('/')
   } catch (e) {
     error.value = (e as Error).message
   } finally {
